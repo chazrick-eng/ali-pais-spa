@@ -1,0 +1,988 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ali Pais Spa &amp; Mobile Services — Ocho Rios</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Pinyon+Script&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --green-900:#10261a;
+    --green-800:#16321f;
+    --green-700:#1c4128;
+    --green-600:#265233;
+    --cream-50:#f7efdc;
+    --cream-100:#f1e6cc;
+    --cream-200:#e9dab6;
+    --gold-500:#c9a961;
+    --gold-400:#d8bd7a;
+    --gold-300:#e7d29a;
+    --ink:#1a1a14;
+    --muted:#5b5847;
+    --serif:"Cormorant Garamond", "Times New Roman", serif;
+    --sans:"Montserrat", system-ui, sans-serif;
+    --script:"Pinyon Script", cursive;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:var(--sans);
+    color:var(--ink);
+    background:var(--cream-50);
+    -webkit-font-smoothing:antialiased;
+    line-height:1.5;
+  }
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+
+  /* ——— Type ——— */
+  .display{font-family:var(--serif);font-weight:500;letter-spacing:.01em}
+  .script{font-family:var(--script);font-weight:400}
+  .eyebrow{
+    font-family:var(--sans);
+    font-size:11px;
+    letter-spacing:.32em;
+    text-transform:uppercase;
+    font-weight:500;
+  }
+
+  /* ——— Layout ——— */
+  .wrap{max-width:1240px;margin:0 auto;padding:0 32px}
+  @media (max-width:900px){.wrap{padding:0 24px}}
+  @media (max-width:560px){.wrap{padding:0 18px}}
+
+  /* ——— Top bar ——— */
+  .topbar{
+    background:var(--green-900);
+    color:var(--cream-100);
+    font-size:12px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+  }
+  .topbar .wrap{
+    display:flex;justify-content:space-between;align-items:center;
+    padding-top:10px;padding-bottom:10px;gap:16px;
+  }
+  .topbar .pill{
+    display:inline-flex;align-items:center;gap:8px;
+    color:var(--gold-300);
+  }
+  .topbar .pill::before{
+    content:"";width:6px;height:6px;border-radius:50%;
+    background:var(--gold-400);box-shadow:0 0 0 3px rgba(201,169,97,.18);
+  }
+  .topbar .right{display:flex;gap:24px;color:var(--cream-200)}
+  @media (max-width:880px){.topbar .right{display:none}}
+  @media (max-width:560px){
+    .topbar{font-size:10.5px;letter-spacing:.14em}
+    .topbar .wrap{padding-top:8px;padding-bottom:8px;justify-content:center}
+  }
+
+  /* ——— Nav ——— */
+  nav.primary{
+    background:var(--cream-50);
+    border-bottom:1px solid rgba(28,65,40,.12);
+    position:sticky;top:0;z-index:40;
+    backdrop-filter:saturate(1.1);
+  }
+  nav.primary .wrap{
+    display:flex;align-items:center;justify-content:space-between;
+    padding-top:18px;padding-bottom:18px;gap:14px;
+  }
+  @media (max-width:560px){
+    nav.primary .wrap{padding-top:14px;padding-bottom:14px}
+  }
+  .brand{display:flex;align-items:center;gap:14px}
+  .brand-mark{
+    width:54px;height:54px;border-radius:50%;
+    background:var(--cream-50);
+    border:1.5px solid var(--gold-500);
+    display:grid;place-items:center;
+    box-shadow:0 6px 16px -8px rgba(16,38,26,.4);
+    overflow:hidden;
+  }
+  .brand-mark img{width:78%;height:auto;display:block}
+  .brand-text{line-height:1}
+  .brand-text .name{
+    font-family:var(--serif);font-weight:600;font-size:22px;letter-spacing:.14em;
+    color:var(--green-800);
+  }
+  .brand-text .sub{
+    font-size:9.5px;letter-spacing:.36em;text-transform:uppercase;
+    color:var(--muted);margin-top:5px;
+  }
+  .navlinks{display:flex;gap:34px;align-items:center}
+  @media (max-width:1080px){.navlinks{gap:24px}}
+  .navlinks a{
+    font-size:12px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--green-800);font-weight:500;
+    position:relative;padding:6px 0;
+  }
+  .navlinks a:hover{color:var(--gold-500)}
+  .navlinks a.active::after{
+    content:"";position:absolute;left:0;right:0;bottom:-2px;
+    height:1px;background:var(--gold-500);
+  }
+  .nav-cta{
+    background:var(--green-700);color:var(--cream-50) !important;
+    padding:12px 22px !important;border-radius:999px;
+    border:1px solid var(--gold-500);
+    letter-spacing:.18em !important;
+  }
+  .nav-cta:hover{background:var(--green-800)}
+  .nav-burger{
+    display:none;
+    width:42px;height:42px;border:1px solid rgba(28,65,40,.25);
+    background:transparent;border-radius:8px;padding:0;
+    align-items:center;justify-content:center;cursor:pointer;
+    color:var(--green-800);
+  }
+  .nav-burger svg{width:22px;height:22px}
+  @media (max-width:880px){
+    .navlinks a:not(.nav-cta){display:none}
+    .nav-cta{display:none}
+    .nav-burger{display:inline-flex}
+    .brand-text .name{font-size:18px;letter-spacing:.12em}
+    .brand-text .sub{font-size:8.5px;letter-spacing:.3em}
+    .brand-mark{width:46px;height:46px}
+  }
+  @media (max-width:560px){
+    .brand-text .sub{display:none}
+    .brand-text .name{font-size:17px}
+  }
+  /* Mobile drawer */
+  .mobile-menu{
+    position:fixed;inset:0;z-index:50;
+    background:var(--green-900);color:var(--cream-50);
+    display:flex;flex-direction:column;
+    padding:24px;
+    transform:translateX(100%);transition:transform .3s ease;
+    visibility:hidden;
+  }
+  .mobile-menu.open{transform:translateX(0);visibility:visible}
+  .mobile-menu .top{
+    display:flex;justify-content:space-between;align-items:center;
+    margin-bottom:32px;
+  }
+  .mobile-menu .close{
+    width:42px;height:42px;border:1px solid rgba(201,169,97,.4);
+    background:transparent;color:var(--cream-50);border-radius:8px;
+    cursor:pointer;display:grid;place-items:center;
+  }
+  .mobile-menu nav{display:flex;flex-direction:column;gap:6px;flex:1}
+  .mobile-menu nav a{
+    font-family:var(--serif);font-size:32px;color:var(--cream-50);
+    padding:14px 0;border-bottom:1px solid rgba(201,169,97,.18);
+    letter-spacing:.02em;
+  }
+  .mobile-menu .footer-cta{
+    display:flex;flex-direction:column;gap:12px;margin-top:24px;
+  }
+
+  /* ——— Hero ——— */
+  .hero{
+    position:relative;overflow:hidden;
+    background:
+      radial-gradient(60% 80% at 85% 20%, rgba(201,169,97,.18), transparent 60%),
+      linear-gradient(180deg, var(--cream-50) 0%, var(--cream-100) 100%);
+    padding:80px 0 100px;
+  }
+  .hero .grid{
+    display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center;
+  }
+  @media (max-width:980px){.hero{padding:56px 0 72px}.hero .grid{grid-template-columns:1fr;gap:48px}}
+  @media (max-width:560px){.hero{padding:36px 0 56px}.hero .grid{gap:36px}}
+
+  .hero .eyebrow{color:var(--green-700);display:flex;align-items:center;gap:14px}
+  .hero .eyebrow::before,.hero .eyebrow::after{
+    content:"";flex:0 0 28px;height:1px;background:var(--gold-500);opacity:.6;
+  }
+  .hero .eyebrow::after{flex:1}
+  .hero h1{
+    font-family:var(--serif);font-weight:500;
+    font-size:clamp(40px,8vw,96px);
+    line-height:.98;letter-spacing:-.01em;
+    color:var(--green-900);
+    margin:18px 0 6px;
+  }
+  .hero h1 .amp{color:var(--gold-500);font-style:italic;font-weight:400}
+  .hero .tag{
+    font-family:var(--script);font-size:clamp(34px,4.5vw,56px);
+    color:var(--gold-500);line-height:1;margin:0 0 28px;
+  }
+  .hero p.lead{
+    font-family:var(--serif);font-weight:400;
+    font-size:clamp(17px,2vw,21px);line-height:1.55;color:#3a4138;
+    max-width:520px;margin:0 0 36px;
+  }
+  .ctas{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  @media (max-width:480px){.ctas{gap:10px}.ctas .btn{flex:1 1 100%;justify-content:center}}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:10px;
+    padding:16px 26px;border-radius:999px;
+    font-size:12px;letter-spacing:.22em;text-transform:uppercase;font-weight:500;
+    transition:transform .2s ease, background .2s ease, color .2s ease;
+    cursor:pointer;border:none;
+    text-align:center;
+  }
+  @media (max-width:560px){.btn{padding:14px 22px;font-size:11px;letter-spacing:.18em}}
+  .btn-primary{background:var(--green-800);color:var(--cream-50);border:1px solid var(--gold-500)}
+  .btn-primary:hover{background:var(--green-900);transform:translateY(-1px)}
+  .btn-ghost{background:transparent;color:var(--green-800);border:1px solid var(--green-800)}
+  .btn-ghost:hover{background:var(--green-800);color:var(--cream-50)}
+  .btn .arrow{transition:transform .2s ease}
+  .btn:hover .arrow{transform:translateX(3px)}
+
+  .trio{
+    margin-top:48px;display:grid;grid-template-columns:repeat(3,1fr);gap:0;
+    border-top:1px solid rgba(28,65,40,.18);
+    border-bottom:1px solid rgba(28,65,40,.18);
+  }
+  .trio > div{padding:18px 6px;text-align:left;border-right:1px solid rgba(28,65,40,.12)}
+  .trio > div:last-child{border-right:none}
+  .trio .word{
+    font-family:var(--serif);font-size:22px;color:var(--green-800);font-weight:600;letter-spacing:.04em;
+  }
+  .trio .desc{font-size:12px;color:var(--muted);margin-top:2px;letter-spacing:.06em}
+  @media (max-width:560px){
+    .trio .word{font-size:18px}
+    .trio .desc{font-size:11px}
+    .trio > div{padding:14px 4px}
+  }
+
+  /* Hero collage */
+  .collage{position:relative;height:620px}
+  @media (max-width:980px){.collage{height:520px;max-width:560px;margin:0 auto}}
+  @media (max-width:560px){.collage{height:380px}}
+  .ph{
+    position:absolute;border-radius:18px;overflow:hidden;
+    box-shadow:0 30px 60px -30px rgba(16,38,26,.55), 0 0 0 1px rgba(201,169,97,.35);
+  }
+  .ph .label{
+    position:absolute;inset:auto 0 0 0;padding:10px 14px;
+    background:linear-gradient(180deg, transparent, rgba(16,38,26,.85));
+    color:var(--cream-100);font-size:10px;letter-spacing:.3em;text-transform:uppercase;
+    font-family:var(--sans);
+  }
+  .ph-1{top:0;left:6%;width:64%;height:58%;}
+  .ph-2{top:42%;right:0;width:46%;height:36%;}
+  .ph-3{bottom:0;left:0;width:42%;height:32%;}
+  .ph-4{
+    bottom:6%;right:14%;width:120px;height:120px;border-radius:50%;
+    background:var(--green-800);color:var(--cream-50);
+    display:grid;place-items:center;text-align:center;
+    border:2px solid var(--gold-500);
+  }
+  @media (max-width:560px){
+    .ph-4{width:84px;height:84px;right:8%;bottom:4%}
+    .ph-4 .num{font-size:24px !important}
+    .ph-4 .lbl{font-size:8px !important;letter-spacing:.22em !important}
+  }
+  .ph-4 .num{font-family:var(--serif);font-size:34px;line-height:1;color:var(--gold-300)}
+  .ph-4 .lbl{font-size:9px;letter-spacing:.28em;margin-top:6px;color:var(--cream-200)}
+
+  .ph img{width:100%;height:100%;object-fit:cover;display:block}
+  .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(16,38,26,.55));pointer-events:none}
+
+  /* Decorative leaves on hero */
+  .leaf-deco{position:absolute;pointer-events:none;opacity:.55}
+  .leaf-tl{top:-30px;left:-30px;width:200px;color:var(--green-700)}
+  .leaf-br{bottom:-40px;right:-40px;width:240px;color:var(--gold-500)}
+
+  /* ——— Section heading ——— */
+  section{padding:96px 0}
+  @media (max-width:760px){section{padding:64px 0}}
+  @media (max-width:480px){section{padding:52px 0}}
+  .sec-head{text-align:center;margin-bottom:60px}
+  @media (max-width:560px){.sec-head{margin-bottom:40px}}
+  .sec-head .eyebrow{color:var(--gold-500);display:inline-flex;align-items:center;gap:14px}
+  .sec-head .eyebrow::before,.sec-head .eyebrow::after{
+    content:"";width:36px;height:1px;background:var(--gold-500);opacity:.6;
+  }
+  .sec-head h2{
+    font-family:var(--serif);font-weight:500;
+    font-size:clamp(30px,4.6vw,56px);line-height:1.05;
+    color:var(--green-900);margin:14px 0 8px;letter-spacing:-.005em;
+  }
+  .sec-head p{
+    color:var(--muted);max-width:560px;margin:0 auto;
+    font-family:var(--serif);font-size:clamp(16px,2vw,19px);line-height:1.55;
+  }
+
+  /* ——— Pillars ——— */
+  .pillars{background:var(--cream-50)}
+  .pillars-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:0;
+    border:1px solid rgba(28,65,40,.15);border-radius:4px;
+    background:#fbf6e7;
+  }
+  @media (max-width:880px){.pillars-grid{grid-template-columns:repeat(2,1fr)}}
+  .pillar{
+    padding:44px 28px;text-align:left;
+    border-right:1px solid rgba(28,65,40,.12);
+    position:relative;
+  }
+  @media (max-width:560px){.pillar{padding:32px 22px}}
+  .pillar:last-child{border-right:none}
+  @media (max-width:880px){
+    .pillar:nth-child(2n){border-right:none}
+    .pillar:nth-child(-n+2){border-bottom:1px solid rgba(28,65,40,.12)}
+  }
+  .pillar .num{
+    font-family:var(--serif);font-size:14px;letter-spacing:.2em;
+    color:var(--gold-500);
+  }
+  .pillar h3{
+    font-family:var(--serif);font-weight:500;
+    font-size:clamp(24px,3vw,32px);color:var(--green-800);margin:14px 0 8px;letter-spacing:.02em;
+  }
+  .pillar p{margin:0;color:var(--muted);font-size:14.5px;line-height:1.6}
+  .pillar .icon{
+    width:36px;height:36px;border-radius:50%;
+    background:var(--green-700);color:var(--gold-300);
+    display:grid;place-items:center;margin-bottom:24px;
+  }
+
+  /* ——— Services ——— */
+  .services{background:var(--green-900);color:var(--cream-100)}
+  .services .sec-head h2{color:var(--cream-50)}
+  .services .sec-head p{color:rgba(241,230,204,.75)}
+  .services-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+    background:rgba(201,169,97,.18);
+    border:1px solid rgba(201,169,97,.18);
+  }
+  @media (max-width:980px){.services-grid{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:560px){.services-grid{grid-template-columns:1fr}}
+  .svc{
+    background:var(--green-900);
+    padding:32px 28px;
+    display:flex;flex-direction:column;gap:10px;
+    transition:background .25s ease;
+    cursor:pointer;
+  }
+  @media (max-width:560px){.svc{padding:26px 22px}}
+  .svc:hover{background:var(--green-800)}
+  .svc-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px}
+  .svc-num{
+    font-family:var(--serif);font-size:13px;letter-spacing:.22em;color:var(--gold-400);
+  }
+  .svc-leaf{color:var(--gold-400);opacity:.8}
+  .svc h3{
+    font-family:var(--serif);font-weight:500;font-size:clamp(22px,2.6vw,26px);color:var(--cream-50);
+    margin:0;line-height:1.15;
+  }
+  .svc p{
+    color:rgba(241,230,204,.7);font-size:14px;line-height:1.6;margin:6px 0 14px;flex:1;
+  }
+  .svc .meta{
+    display:flex;justify-content:space-between;align-items:baseline;
+    padding-top:14px;border-top:1px solid rgba(201,169,97,.2);
+    font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--gold-300);
+  }
+  .svc .price{font-family:var(--serif);font-size:18px;color:var(--cream-50);letter-spacing:.04em;text-transform:none}
+
+  .more-services{
+    margin-top:48px;display:flex;flex-wrap:wrap;justify-content:center;gap:12px;
+  }
+  .chip{
+    border:1px solid rgba(201,169,97,.4);
+    color:var(--cream-100);
+    padding:10px 18px;border-radius:999px;
+    font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+  }
+  .chip.gold{background:var(--gold-500);color:var(--green-900);border-color:var(--gold-500);font-weight:600}
+
+  /* ——— Mobile band ——— */
+  .mobile-band{
+    background:var(--cream-100);
+    position:relative;overflow:hidden;
+  }
+  .mobile-band .grid{
+    display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;
+  }
+  @media (max-width:980px){.mobile-band .grid{grid-template-columns:1fr;gap:48px}}
+  @media (max-width:560px){.mobile-band .grid{gap:36px}}
+  .mobile-band h2{
+    font-family:var(--serif);font-weight:500;
+    font-size:clamp(34px,5vw,68px);line-height:1.02;
+    color:var(--green-900);margin:18px 0 20px;letter-spacing:-.005em;
+  }
+  .mobile-band h2 em{
+    font-family:var(--script);font-style:normal;color:var(--gold-500);
+    font-size:1.05em;font-weight:400;
+  }
+  .mobile-band .lead{
+    font-family:var(--serif);font-size:clamp(17px,2vw,20px);line-height:1.55;color:#3a4138;
+    max-width:520px;margin:0 0 32px;
+  }
+  .checks{display:grid;gap:14px;margin:0 0 36px}
+  .check{display:flex;align-items:flex-start;gap:14px;font-size:15px;color:#2c3a30}
+  .check svg{flex:0 0 22px;margin-top:2px;color:var(--green-700)}
+  .check strong{display:block;color:var(--green-900);font-weight:600;margin-bottom:2px}
+  .check span{color:var(--muted);font-size:14px}
+
+  .van-card{
+    background:var(--green-900);color:var(--cream-100);
+    border-radius:18px;padding:48px 40px;
+    border:1px solid rgba(201,169,97,.35);
+    position:relative;overflow:hidden;
+    min-height:420px;display:flex;flex-direction:column;justify-content:space-between;
+  }
+  @media (max-width:560px){.van-card{padding:36px 28px;min-height:auto}}
+  .van-card::before{
+    content:"";position:absolute;inset:auto -50px -80px auto;
+    width:300px;height:300px;border-radius:50%;
+    background:radial-gradient(circle, rgba(201,169,97,.18), transparent 70%);
+  }
+  .van-card .eyebrow{color:var(--gold-400)}
+  .van-card .big{
+    font-family:var(--serif);font-size:clamp(32px,4vw,48px);line-height:1.05;color:var(--cream-50);
+    margin:18px 0;font-weight:500;
+  }
+  .van-card .row{
+    display:flex;align-items:center;gap:18px;
+    padding:16px 0;border-top:1px solid rgba(201,169,97,.2);
+  }
+  .van-card .row:last-child{border-bottom:1px solid rgba(201,169,97,.2)}
+  .van-card .row .ic{
+    width:44px;height:44px;border-radius:50%;
+    background:rgba(201,169,97,.12);
+    display:grid;place-items:center;color:var(--gold-400);flex:0 0 44px;
+  }
+  .van-card .row .lab{font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-300)}
+  .van-card .row .val{font-family:var(--serif);font-size:20px;color:var(--cream-50);margin-top:2px}
+
+  /* ——— Process ——— */
+  .process .steps{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:28px;
+    counter-reset:step;
+  }
+  @media (max-width:880px){.process .steps{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:520px){.process .steps{grid-template-columns:1fr}}
+  .step{
+    position:relative;padding:30px 24px;
+    background:#fbf6e7;
+    border:1px solid rgba(28,65,40,.12);
+    border-radius:6px;
+  }
+  .step .n{
+    font-family:var(--serif);font-size:clamp(44px,5vw,60px);line-height:1;color:var(--gold-500);
+    font-weight:500;margin-bottom:8px;
+  }
+  .step h4{
+    font-family:var(--serif);font-size:22px;color:var(--green-900);margin:0 0 8px;font-weight:600;
+  }
+  .step p{margin:0;color:var(--muted);font-size:14px;line-height:1.55}
+
+  /* ——— Testimonial ——— */
+  .testimony{background:var(--cream-100);text-align:center}
+  .testimony blockquote{
+    margin:0 auto;max-width:820px;
+    font-family:var(--serif);font-weight:400;
+    font-size:clamp(22px,3.4vw,42px);line-height:1.3;color:var(--green-900);
+    font-style:italic;
+  }
+  .testimony blockquote::before,.testimony blockquote::after{
+    content:"";display:block;width:40px;height:1px;background:var(--gold-500);margin:0 auto 28px;
+  }
+  .testimony blockquote::after{margin:28px auto 0}
+  .testimony .who{
+    font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);margin-top:24px;
+  }
+  .testimony .stars{color:var(--gold-500);letter-spacing:.3em;font-size:14px;margin-top:14px}
+
+  /* ——— CTA / contact ——— */
+  .cta{
+    background:
+      linear-gradient(180deg, var(--green-800), var(--green-900));
+    color:var(--cream-100);text-align:center;
+  }
+  .cta .lotus{color:var(--gold-400);margin:0 auto 16px;display:block}
+  .cta h2{
+    font-family:var(--serif);font-weight:500;
+    font-size:clamp(34px,5vw,68px);line-height:1.05;
+    color:var(--cream-50);margin:0 0 8px;letter-spacing:-.005em;
+  }
+  .cta .script{
+    font-family:var(--script);font-size:clamp(30px,4vw,52px);
+    color:var(--gold-400);line-height:1;margin-bottom:24px;
+  }
+  .cta p.sub{
+    color:rgba(241,230,204,.78);max-width:580px;margin:0 auto 40px;
+    font-family:var(--serif);font-size:clamp(16px,2vw,19px);
+  }
+  .contact-row{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+    max-width:1000px;margin:0 auto 48px;
+    background:rgba(201,169,97,.25);
+    border:1px solid rgba(201,169,97,.25);
+  }
+  @media (max-width:760px){.contact-row{grid-template-columns:1fr}}
+  .contact-cell{
+    background:var(--green-900);padding:30px 24px;text-align:center;
+  }
+  @media (max-width:560px){.contact-cell{padding:24px 18px}}
+  .contact-cell .ic{
+    width:42px;height:42px;border-radius:50%;
+    background:rgba(201,169,97,.14);color:var(--gold-400);
+    display:grid;place-items:center;margin:0 auto 14px;
+  }
+  .contact-cell .lab{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-300)}
+  .contact-cell .val{
+    font-family:var(--serif);font-size:22px;color:var(--cream-50);margin-top:6px;
+  }
+  .contact-cell .val.small{font-size:17px}
+
+  /* ——— Footer ——— */
+  footer{
+    background:var(--green-900);
+    color:rgba(241,230,204,.6);
+    border-top:1px solid rgba(201,169,97,.18);
+    padding:36px 0;
+  }
+  footer .wrap{
+    display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;
+  }
+  @media (max-width:560px){
+    footer .wrap{flex-direction:column;text-align:center;gap:14px}
+    footer .ribbon{flex-wrap:wrap;justify-content:center;gap:10px;font-size:10px;letter-spacing:.24em}
+  }
+  footer .ribbon{
+    display:flex;gap:18px;font-size:11px;letter-spacing:.32em;text-transform:uppercase;
+  }
+  footer .ribbon span{color:var(--gold-300)}
+  footer .ribbon .dot{color:rgba(201,169,97,.4)}
+  footer .copy{font-size:12px;letter-spacing:.05em}
+
+  /* misc */
+  .lotus-divider{display:flex;align-items:center;justify-content:center;gap:14px;margin:18px 0}
+  .lotus-divider .line{width:48px;height:1px;background:var(--gold-500);opacity:.6}
+  .lotus-divider svg{color:var(--gold-500);width:22px;height:22px}
+</style>
+</head>
+<body>
+
+  <!-- Top bar -->
+  <div class="topbar">
+    <div class="wrap">
+      <div class="pill">Now booking — Spring season openings</div>
+      <div class="right">
+        <span>📞 1 876 546 8616</span>
+        <span>📍 130 Main Street, Ocho Rios</span>
+        <span>Mon–Sun · 9am–8pm</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Nav -->
+  <nav class="primary">
+    <div class="wrap">
+      <a class="brand" href="#top" aria-label="Ali Pais Spa &amp; Mobile Services">
+        <span class="brand-mark">
+          <img src="assets/logo-mark.png" alt="" />
+        </span>
+        <span class="brand-text">
+          <span class="name">ALI PAIS</span>
+          <span class="sub">Spa &amp; Mobile Services</span>
+        </span>
+      </a>
+      <div class="navlinks">
+        <a href="#services" class="active">Services</a>
+        <a href="#mobile">Mobile Spa</a>
+        <a href="#process">How It Works</a>
+        <a href="#contact">Contact</a>
+        <a href="#contact" class="nav-cta">Book Now</a>
+      </div>
+      <button class="nav-burger" aria-label="Open menu" onclick="document.querySelector('.mobile-menu').classList.add('open')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile drawer -->
+  <div class="mobile-menu" role="dialog" aria-label="Menu">
+    <div class="top">
+      <span class="eyebrow" style="color:var(--gold-400);letter-spacing:.3em">Menu</span>
+      <button class="close" aria-label="Close menu" onclick="document.querySelector('.mobile-menu').classList.remove('open')">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <nav>
+      <a href="#services" onclick="document.querySelector('.mobile-menu').classList.remove('open')">Services</a>
+      <a href="#mobile" onclick="document.querySelector('.mobile-menu').classList.remove('open')">Mobile Spa</a>
+      <a href="#process" onclick="document.querySelector('.mobile-menu').classList.remove('open')">How It Works</a>
+      <a href="#contact" onclick="document.querySelector('.mobile-menu').classList.remove('open')">Contact</a>
+    </nav>
+    <div class="footer-cta">
+      <a class="btn btn-primary" style="background:var(--gold-500);color:var(--green-900);border-color:var(--gold-300)" href="tel:18765468616">Call to book</a>
+      <a class="btn btn-ghost" style="color:var(--cream-100);border-color:var(--gold-400)" href="https://api.whatsapp.com/send?phone=18765468616" target="_blank" rel="noopener">WhatsApp</a>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero" id="top">
+    <svg class="leaf-deco leaf-tl" viewBox="0 0 200 200" fill="currentColor"><path d="M20 180 C 60 120, 120 80, 180 60 C 140 100, 110 140, 60 170 C 50 175, 30 180, 20 180 Z" opacity=".6"/><path d="M40 160 C 80 110, 130 90, 170 80" stroke="currentColor" stroke-width="1.4" fill="none" opacity=".8"/></svg>
+    <svg class="leaf-deco leaf-br" viewBox="0 0 200 200" fill="currentColor"><path d="M180 20 C 130 60, 80 110, 40 170 C 90 140, 130 110, 170 70 C 175 60, 180 40, 180 20 Z" opacity=".5"/></svg>
+
+    <div class="wrap">
+      <div class="grid">
+        <div>
+          <div class="eyebrow">Ocho Rios · Jamaica</div>
+          <h1>Relax<span class="amp"> &amp; </span>Renew<br/>Wherever You Are.</h1>
+          <p class="tag">Self care is the best care.</p>
+          <p class="lead">A full-service day spa and mobile spa team bringing licensed massage, facials and body treatments to your home, villa, hotel or our quiet studio on Main Street.</p>
+          <div class="ctas">
+            <a class="btn btn-primary" href="#contact">Book an appointment <span class="arrow">→</span></a>
+            <a class="btn btn-ghost" href="#services">Explore services</a>
+          </div>
+          <div class="trio">
+            <div><div class="word">Relax.</div><div class="desc">Your body deserves it.</div></div>
+            <div><div class="word">Renew.</div><div class="desc">Refresh your mind.</div></div>
+            <div><div class="word">Revive.</div><div class="desc">Rejuvenate your spirit.</div></div>
+          </div>
+        </div>
+
+        <!-- Collage -->
+        <div class="collage" aria-hidden="true">
+          <div class="ph ph-1">
+            <img src="assets/photos/cliffside-couple.jpg" alt="Couples massage on a cliffside terrace overlooking the Caribbean Sea" />
+            <div class="label">Couples Massage · Cliffside</div>
+          </div>
+          <div class="ph ph-2">
+            <img src="assets/photos/ocean-view.jpg" alt="Massage table with ocean view" />
+            <div class="label">Ocean-View Sessions</div>
+          </div>
+          <div class="ph ph-3">
+            <img src="assets/photos/poolside.jpg" alt="Massage table set up poolside at sunset" />
+            <div class="label">Poolside Setup</div>
+          </div>
+          <div class="ph-4 ph">
+            <div>
+              <div class="num">12+</div>
+              <div class="lbl">Treatments</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pillars -->
+  <section class="pillars">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Our Philosophy</span>
+        <h2>Four steps to a softer you</h2>
+        <p>Every visit follows the same simple rhythm — the kind of care that resets a long week or rounds out a holiday.</p>
+      </div>
+
+      <div class="pillars-grid">
+        <div class="pillar">
+          <div class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c2 4 2 8 0 12-2-4-2-8 0-12z"/><path d="M5 11c4 0 7 2 7 6-4 0-7-2-7-6z"/><path d="M19 11c-4 0-7 2-7 6 4 0 7-2 7-6z"/></svg></div>
+          <div class="num">— 01 —</div>
+          <h3>Relax</h3>
+          <p>Sink into quiet rooms, warm towels, and slow hands. Your body deserves it.</p>
+        </div>
+        <div class="pillar">
+          <div class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c0-6 4-10 9-11-1 7-4 11-9 11z"/><path d="M12 21c0-6-4-10-9-11 1 7 4 11 9 11z"/></svg></div>
+          <div class="num">— 02 —</div>
+          <h3>Renew</h3>
+          <p>Refresh your mind with botanical aromas, cool stone, steam and breath.</p>
+        </div>
+        <div class="pillar">
+          <div class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="3"/><path d="M5 21c0-4 3-7 7-7s7 3 7 7"/></svg></div>
+          <div class="num">— 03 —</div>
+          <h3>Revive</h3>
+          <p>Rejuvenate your spirit. Walk out lighter, calmer, and a half-shade brighter.</p>
+        </div>
+        <div class="pillar">
+          <div class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/></svg></div>
+          <div class="num">— 04 —</div>
+          <h3>Repeat</h3>
+          <p>Make self-care a priority — book a series, save your favorite ritual.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="services" id="services">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">The Menu</span>
+        <h2>Treatments &amp; Rituals</h2>
+        <p>From the deeply therapeutic to the purely indulgent — each service tailored on the day to where your body is.</p>
+      </div>
+
+      <div class="services-grid">
+        <div class="svc">
+          <div class="svc-head">
+            <span class="svc-num">01</span>
+            <span class="svc-leaf"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M3 21c0-9 6-15 18-18-1 12-7 18-18 18z"/></svg></span>
+          </div>
+          <h3>Swedish Massage</h3>
+          <p>Long, flowing strokes designed to release surface tension and slow a racing nervous system. The classic for a reason.</p>
+          <div class="meta"><span>60 / 90 min</span><span class="price">from $85</span></div>
+        </div>
+
+        <div class="svc">
+          <div class="svc-head">
+            <span class="svc-num">02</span>
+            <span class="svc-leaf"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M3 21c0-9 6-15 18-18-1 12-7 18-18 18z"/></svg></span>
+          </div>
+          <h3>Deep Tissue</h3>
+          <p>Slow, focused pressure on stubborn knots and chronic tightness — for shoulders, lower back, hips and posture aches.</p>
+          <div class="meta"><span>60 / 90 min</span><span class="price">from $110</span></div>
+        </div>
+
+        <div class="svc">
+          <div class="svc-head">
+            <span class="svc-num">03</span>
+            <span class="svc-leaf"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M3 21c0-9 6-15 18-18-1 12-7 18-18 18z"/></svg></span>
+          </div>
+          <h3>Hot Stone Ritual</h3>
+          <p>Heated basalt stones placed along key points, paired with warm oil to thaw deep muscular tension.</p>
+          <div class="meta"><span>75 min</span><span class="price">from $120</span></div>
+        </div>
+
+        <div class="svc">
+          <div class="svc-head">
+            <span class="svc-num">04</span>
+            <span class="svc-leaf"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M3 21c0-9 6-15 18-18-1 12-7 18-18 18z"/></svg></span>
+          </div>
+          <h3>Lymphatic Drainage</h3>
+          <p>Gentle, rhythmic technique that supports circulation, reduces puffiness, and leaves the body lighter.</p>
+          <div class="meta"><span>60 min</span><span class="price">from $95</span></div>
+        </div>
+
+        <div class="svc">
+          <div class="svc-head">
+            <span class="svc-num">05</span>
+            <span class="svc-leaf"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M3 21c0-9 6-15 18-18-1 12-7 18-18 18z"/></svg></span>
+          </div>
+          <h3>Prenatal Massage</h3>
+          <p>Expectant-mother-safe positioning and pressure to ease back, hip, and leg discomfort throughout pregnancy.</p>
+          <div class="meta"><span>60 min</span><span class="price">from $95</span></div>
+        </div>
+
+        <div class="svc">
+          <div class="svc-head">
+            <span class="svc-num">06</span>
+            <span class="svc-leaf"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M3 21c0-9 6-15 18-18-1 12-7 18-18 18z"/></svg></span>
+          </div>
+          <h3>Signature Facial</h3>
+          <p>Cleanse, exfoliate, mask, massage. A custom routine using botanical-led products for your skin's mood.</p>
+          <div class="meta"><span>60 min</span><span class="price">from $90</span></div>
+        </div>
+      </div>
+
+      <div class="more-services">
+        <span class="chip">Sauna Treatment</span>
+        <span class="chip">Body Scrubs</span>
+        <span class="chip">Body Wraps</span>
+        <span class="chip">Manicures &amp; Pedicures</span>
+        <span class="chip">Waxing</span>
+        <span class="chip gold">…and more</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Photo strip -->
+  <section style="padding:0;background:var(--cream-50)">
+    <div class="photo-strip" style="display:grid;grid-template-columns:repeat(4,1fr);gap:2px">
+      <figure style="margin:0;aspect-ratio:1/1;overflow:hidden"><img src="assets/photos/couple-beach.jpg" alt="Couple enjoying massage on the beach under trees" style="width:100%;height:100%;object-fit:cover;display:block"/></figure>
+      <figure style="margin:0;aspect-ratio:1/1;overflow:hidden"><img src="assets/photos/therapist-deck.jpg" alt="Therapist working on guest on a deck" style="width:100%;height:100%;object-fit:cover;display:block"/></figure>
+      <figure style="margin:0;aspect-ratio:1/1;overflow:hidden"><img src="assets/photos/garden-massage.jpg" alt="Two-table garden massage session" style="width:100%;height:100%;object-fit:cover;display:block"/></figure>
+      <figure style="margin:0;aspect-ratio:1/1;overflow:hidden"><img src="assets/photos/in-home.jpg" alt="In-home massage session" style="width:100%;height:100%;object-fit:cover;display:block"/></figure>
+    </div>
+    <style>@media (max-width:760px){.photo-strip{grid-template-columns:repeat(2,1fr) !important}}</style>
+  </section>
+
+  <!-- Mobile spa band -->
+  <section class="mobile-band" id="mobile">
+    <div class="wrap">
+      <div class="grid">
+        <div>
+          <span class="eyebrow" style="color:var(--gold-500)">Mobile Spa Service</span>
+          <h2>Come to us — or <em>we'll come to you.</em></h2>
+          <p class="lead">Our therapists travel with everything they need: tables, oils, linens, candlelight. Same studio standards, set up in your space within minutes.</p>
+
+          <div class="checks">
+            <div class="check">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+              <div><strong>Homes, villas &amp; hotels</strong><span>From the North Coast to private residences inland — we cover the parish.</span></div>
+            </div>
+            <div class="check">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+              <div><strong>Couples &amp; small groups</strong><span>Bridal mornings, anniversaries, mother-daughter days, girls-trip rituals.</span></div>
+            </div>
+            <div class="check">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+              <div><strong>Same-day availability</strong><span>Often within 2–3 hours, depending on the day. Call to check.</span></div>
+            </div>
+          </div>
+
+          <a class="btn btn-primary" href="#contact">Request a mobile visit <span class="arrow">→</span></a>
+        </div>
+
+        <aside class="van-card" style="background:linear-gradient(180deg,rgba(16,38,26,.4),rgba(16,38,26,.92)),url('assets/photos/couple-beach.jpg') center/cover;background-color:var(--green-900)">
+          <div>
+            <span class="eyebrow">On-Location</span>
+            <div class="big">A spa that travels light — and quietly.</div>
+          </div>
+          <div>
+            <div class="row">
+              <div class="ic">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17h13V6H3z"/><path d="M16 10h4l2 3v4h-6"/><circle cx="7.5" cy="17.5" r="1.6"/><circle cx="17.5" cy="17.5" r="1.6"/></svg>
+              </div>
+              <div>
+                <div class="lab">Service Area</div>
+                <div class="val">Ocho Rios &amp; surrounds</div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="ic">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+              </div>
+              <div>
+                <div class="lab">Setup Time</div>
+                <div class="val">~ 15 minutes</div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="ic">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-5-7-11a7 7 0 1 1 14 0c0 6-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+              </div>
+              <div>
+                <div class="lab">Travel Fee</div>
+                <div class="val">Free within 10km</div>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section class="process" id="process">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">How It Works</span>
+        <h2>Booking, simply</h2>
+        <p>No apps, no portals — just a quick call or message and we handle the rest.</p>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="n">1</div>
+          <h4>Reach out</h4>
+          <p>Call or WhatsApp 1 876 546 8616. Tell us what you're hoping to feel — we'll suggest the right ritual.</p>
+        </div>
+        <div class="step">
+          <div class="n">2</div>
+          <h4>Choose where</h4>
+          <p>Visit our studio at 130 Main Street, or have us set up at your villa, hotel suite or home.</p>
+        </div>
+        <div class="step">
+          <div class="n">3</div>
+          <h4>Lock the time</h4>
+          <p>Same-day slots are common; weekends fill quickly. We confirm by message.</p>
+        </div>
+        <div class="step">
+          <div class="n">4</div>
+          <h4>Surrender</h4>
+          <p>Phone away, robe on, candles lit. The next 60–90 minutes belong only to you.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Studio feature -->
+  <section style="padding:0;background:var(--green-900);color:var(--cream-100)">
+    <div style="display:grid;grid-template-columns:1fr 1fr;align-items:stretch;gap:0" class="studio-split">
+      <figure style="margin:0;min-height:520px;background:url('assets/photos/studio-lobby.jpg') center/cover"></figure>
+      <div style="padding:clamp(40px,6vw,80px);display:flex;flex-direction:column;justify-content:center">
+        <span class="eyebrow" style="color:var(--gold-400);font-size:12px;letter-spacing:.28em;text-transform:uppercase">Visit the Studio</span>
+        <h2 style="font-family:var(--serif);font-weight:500;font-size:clamp(30px,4vw,48px);line-height:1.1;color:var(--cream-50);margin:14px 0 16px">More than a room — a small sanctuary in Ocho Rios.</h2>
+        <p style="font-family:var(--serif);font-size:clamp(16px,2vw,19px);line-height:1.55;color:rgba(241,230,204,.82);max-width:480px;margin:0 0 24px">Step into a welcoming lobby, then choose your ritual: manicure &amp; pedicure stations, a full-body massage chair, and two private treatment rooms tucked just beyond.</p>
+        <ul style="list-style:none;padding:0;margin:0 0 32px;display:grid;gap:10px;font-family:var(--sans);font-size:14px;color:rgba(241,230,204,.85)">
+          <li style="display:flex;gap:12px;align-items:center"><span style="width:6px;height:6px;border-radius:50%;background:var(--gold-400)"></span>Reception &amp; waiting lounge</li>
+          <li style="display:flex;gap:12px;align-items:center"><span style="width:6px;height:6px;border-radius:50%;background:var(--gold-400)"></span>Manicure &amp; pedicure stations</li>
+          <li style="display:flex;gap:12px;align-items:center"><span style="width:6px;height:6px;border-radius:50%;background:var(--gold-400)"></span>Full-body massage chair</li>
+          <li style="display:flex;gap:12px;align-items:center"><span style="width:6px;height:6px;border-radius:50%;background:var(--gold-400)"></span>Two private treatment rooms</li>
+        </ul>
+        <a class="btn btn-primary" href="#contact" style="align-self:flex-start;background:var(--gold-500);color:var(--green-900);border-color:var(--gold-300)">Book a studio visit <span class="arrow">→</span></a>
+      </div>
+    </div>
+    <style>@media (max-width:880px){.studio-split{grid-template-columns:1fr !important}.studio-split figure{min-height:320px !important}}</style>
+  </section>
+
+  <!-- Testimonial -->
+  <section class="testimony">
+    <div class="wrap">
+      <blockquote>
+        Ali set up on the deck of our villa with the ocean right there. By the time she lit the candles I'd already forgotten what day it was. Best 90 minutes of the trip.
+      </blockquote>
+      <div class="stars">★ ★ ★ ★ ★</div>
+      <div class="who">— Mobile Spa Guest · Ocho Rios</div>
+    </div>
+  </section>
+
+  <!-- CTA / Contact -->
+  <section class="cta" id="contact">
+    <div class="wrap">
+      <svg class="lotus" width="36" height="36" viewBox="0 0 36 36" fill="currentColor" aria-hidden="true">
+        <path d="M18 6c2 4 3 8 0 14-3-6-2-10 0-14z" opacity=".9"/>
+        <path d="M6 16c4-1 8 1 12 6-6 1-10-1-12-6z" opacity=".75"/>
+        <path d="M30 16c-4-1-8 1-12 6 6 1 10-1 12-6z" opacity=".75"/>
+        <path d="M10 12c3 1 6 4 8 10-5-1-7-4-8-10z" opacity=".55"/>
+        <path d="M26 12c-3 1-6 4-8 10 5-1 7-4 8-10z" opacity=".55"/>
+      </svg>
+      <h2>Book your appointment</h2>
+      <div class="script">today.</div>
+      <p class="sub">Your time. Your well-being. You can come to us, or we'll come to you.</p>
+
+      <div class="contact-row">
+        <a class="contact-cell" href="tel:18765468616">
+          <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92V21a1 1 0 0 1-1.1 1A19 19 0 0 1 2 4.1 1 1 0 0 1 3 3h4.09a1 1 0 0 1 1 .75l1 4a1 1 0 0 1-.27 1L7 10.5a16 16 0 0 0 6.5 6.5l1.75-1.82a1 1 0 0 1 1-.27l4 1a1 1 0 0 1 .75 1z"/></svg></div>
+          <div class="lab">Phone &amp; WhatsApp</div>
+          <div class="val">1 876 546 8616</div>
+        </a>
+        <div class="contact-cell">
+          <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-5-7-11a7 7 0 1 1 14 0c0 6-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></div>
+          <div class="lab">Studio</div>
+          <div class="val small">130 Main Street<br/>Ocho Rios, Jamaica</div>
+        </div>
+        <div class="contact-cell">
+          <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+          <div class="lab">Hours</div>
+          <div class="val small">Monday – Sunday<br/>9:00am – 8:00pm</div>
+        </div>
+      </div>
+
+      <div class="ctas" style="justify-content:center">
+        <a class="btn btn-primary" style="background:var(--gold-500);color:var(--green-900);border-color:var(--gold-300)" href="tel:18765468616">Call to book <span class="arrow">→</span></a>
+        <a class="btn btn-ghost" style="color:var(--cream-100);border-color:var(--gold-400)" href="https://api.whatsapp.com/send?phone=18765468616" target="_blank" rel="noopener">Message on WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="wrap">
+      <div class="ribbon">
+        <span>Beauty.</span><span class="dot">|</span>
+        <span>Wellness.</span><span class="dot">|</span>
+        <span>Relaxation.</span><span class="dot">|</span>
+        <span>Delivered to you.</span>
+      </div>
+      <div class="copy">© 2026 Ali Pais Spa &amp; Mobile Services. All rights reserved.</div>
+    </div>
+  </footer>
+
+</body>
+</html>
